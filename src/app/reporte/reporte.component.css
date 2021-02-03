@@ -1,0 +1,53 @@
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+th{
+    border: 1px solid black;
+    text-align: start;
+    background-color: #E1E1E1;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+thead td{
+    border: 1px solid black;
+    text-align: center;
+    font-weight: bold;
+    background-color: #E1E1E1;
+}
+td{
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    text-align: end;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+tfoot td{
+    border: 1px solid black;
+    font-weight: bold;
+}
+
+.actual{
+    background-color: #FFFF99;
+}
+
+.cecos{
+    text-align: start;
+}
+.negativo{
+    color:red;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    table{
+        width: 1200px;
+    }
+    body{
+        font-size: 24px;
+        width: 100%; 
+    }
+    
+  }

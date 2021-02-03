@@ -1,0 +1,45 @@
+<table>
+    <thead>
+        <tr>
+            <th style="width: 10%;" rowspan="2">Forecast 2020</th>
+            <th style="width: 10%;" rowspan="2">Plan 2021</th>
+            <th style="width: 10%;" rowspan="2" class="actual">Presupuesto 2021</th>
+            <th style="width: 30%;" rowspan="2">Centro de costos</th>
+            <td style="width: 20%;" colspan="2">Cambio Vs. Plan 2021</td>
+            <td style="width: 20%;" colspan="2">Cambio Vs Forecast 2020</td>
+        </tr>
+        <tr>
+            <td style="width: 10%;">$</td>
+            <td style="width: 10%;">%</td>
+            <td style="width: 10%;">$</td>
+            <td style="width: 10%;">%</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of informacion">
+            <td>{{item.forecast | number:'1.1-1'}}</td>
+            <td>{{item.anioAnt | number:'1.1-1'}}</td>
+            <td class="actual">{{item.actual | number:'1.1-1'}}</td>
+            <td class="cecos">
+                <span (click)="ejecucion(item.idCeco)" *ngIf="item.idCeco.toString().length>=6; false">[+]</span>
+                {{item.CECO}}
+            </td>
+            <td>{{item.anioAnt-item.actual | number:'1.1-1'}}</td>
+            <td>{{(((item.anioAnt-item.actual)/item.anioAnt)) | percent:'1.1-1'}} </td>
+            <td>{{item.forecast-item.actual | number:'1.1-1'}}</td>
+            <td>{{(((item.forecast-item.actual)/item.forecast)) | percent:'1.1-1'}}</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>41653</td>
+            <td>53421</td>
+            <td class="actual">54770</td>
+            <td class="cecos">[+]Mexico</td>
+            <td>(1349)</td>            
+            <td>2.5%</td>            
+            <td>(13117)</td>            
+            <td>2.5%</td>
+        </tr>
+    </tfoot>
+</table>
