@@ -16,18 +16,30 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of informacion">
-            <td>{{item.forecast | number:'1.1-1'}}</td>
-            <td>{{item.anioAnt | number:'1.1-1'}}</td>
-            <td class="actual">{{item.actual | number:'1.1-1'}}</td>
+        <tr *ngFor="let item of infproc">
+            <td [ngClass]="{'negativo': item.forecast<0}">{{item.forecast | number:'1.1-1'}}</td>
+            <td [ngClass]="{'negativo': item.anioAnt<0}">{{item.anioAnt | number:'1.1-1'}}</td>
+            <td [ngClass]="{'negativo': item.actual<0}" class="actual">{{item.actual | number:'1.1-1'}}</td>
             <td class="cecos">
-                <span (click)="ejecucion(item.idCeco)" *ngIf="item.idCeco.toString().length>=6; false">[+]</span>
+                <span (click)="ejecucion(item.idCeco)" *ngIf="item.idCeco.toString().length>=6"
+                    style="cursor: pointer;">[+]</span>
                 {{item.CECO}}
             </td>
-            <td>{{item.anioAnt-item.actual | number:'1.1-1'}}</td>
-            <td>{{(((item.anioAnt-item.actual)/item.anioAnt)) | percent:'1.1-1'}} </td>
-            <td>{{item.forecast-item.actual | number:'1.1-1'}}</td>
-            <td>{{(((item.forecast-item.actual)/item.forecast)) | percent:'1.1-1'}}</td>
+            <td [ngClass]="{'negativo': (item.anioAnt-item.actual)<0}">
+                {{calculo(item.actual,item.anioAnt)}}
+            </td>
+            <td [ngClass]="{'negativo': (item.anioAnt-item.actual)<0}">
+                {{calculo(item.actual,item.anioAnt)}}
+                {{calculoPorcentaje(item.actual,item.anioAnt)}}
+            </td>
+            <td [ngClass]="{'negativo': (item.forecast-item.actual)<0}">
+                {{calculo(item.actual,item.forecast)}}
+            </td>
+            <td [ngClass]="{'negativo': (item.forecast-item.actual)<0}">
+                <span *ngIf="(item.forecast-item.actual)<0">(</span>
+                {{(((item.forecast-item.actual)/item.forecast)) | percent:'1.1-1'}}
+                <span *ngIf="(item.forecast-item.actual)<0">)</span>
+            </td>
         </tr>
     </tbody>
     <tfoot>
@@ -36,9 +48,9 @@
             <td>53421</td>
             <td class="actual">54770</td>
             <td class="cecos">[+]Mexico</td>
-            <td>(1349)</td>            
-            <td>2.5%</td>            
-            <td>(13117)</td>            
+            <td>(1349)</td>
+            <td>2.5%</td>
+            <td>(13117)</td>
             <td>2.5%</td>
         </tr>
     </tfoot>
