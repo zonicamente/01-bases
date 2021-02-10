@@ -1,0 +1,87 @@
+<div style="text-align: center;">
+    <h3>
+        Ventas
+        <span style="color: #B60111; cursor: pointer; font-size: 15px;" (click)="ejecucion(1000010599)">
+            <u>inicio</u>
+        </span>
+    </h3>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th style="width: 10%;" rowspan="2">Ventas {{anioAnt}}</th>
+            <th style="width: 10%;" rowspan="2">Semana anterior</th>
+            <th style="width: 10%;" rowspan="2" class="actual">Ventas {{anioAnt+1}}</th>
+            <th style="width: 30%;" rowspan="2">Centro de costos</th>
+            <td style="width: 20%;" colspan="2">Var Vs. Sem Anterior</td>
+            <td style="width: 20%;" colspan="2">Var Vs {{anioAnt}}</td>
+        </tr>
+        <tr>
+            <td style="width: 10%;">$</td>
+            <td style="width: 10%;">%</td>
+            <td style="width: 10%;">$</td>
+            <td style="width: 10%;">%</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of infproc">
+            <td [ngClass]="{'negativo': item.forecast<0}">
+                {{calculo(0,item.forecast)}}
+            </td>
+            <td [ngClass]="{'negativo': item.anioAnt<0}">
+                {{calculo(0,item.anioAnt)}}
+            </td>
+            <td [ngClass]="{'negativo': item.actual<0}" class="actual">
+                {{calculo(0,item.actual)}}
+            </td>
+            <td class="cecos">
+                <span (click)="ejecucion(item.idCeco)" *ngIf="item.idCeco.toString().length>=6"
+                    style="cursor: pointer;">[+]</span>
+                {{item.CECO}}
+            </td>
+            <td [ngClass]="{'negativo': (item.anioAnt-item.actual)<0}">
+                {{calculo(item.actual,item.anioAnt)}}
+            </td>
+            <td [ngClass]="{'negativo': (item.anioAnt-item.actual)<0}">
+                {{calculoPorcentaje(item.actual,item.anioAnt)}}
+            </td>
+            <td [ngClass]="{'negativo': (item.forecast-item.actual)<0}">
+                {{calculo(item.actual,item.forecast)}}
+            </td>
+            <td [ngClass]="{'negativo': (item.forecast-item.actual)<0}">
+                {{calculoPorcentaje(item.actual,item.forecast)}}
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr *ngFor="let item of infFoot">
+            <td [ngClass]="{'negativo': item.forecast<0}">
+                {{calculo(0,item.forecast)}}
+            </td>
+            <td [ngClass]="{'negativo': item.anioAnt<0}">
+                {{calculo(0,item.anioAnt)}}
+            </td>
+            <td [ngClass]="{'negativo': item.actual<0}" class="actual">
+                {{calculo(0,item.actual)}}
+            </td>
+            <td class="cecos">
+                <span (click)="ejecucion(item.idCeco)" *ngIf="item.idCeco.toString().length>=6"
+                    style="cursor: pointer;">[+]</span>
+                {{item.CECO}}
+            </td>
+            <td [ngClass]="{'negativo': (item.anioAnt-item.actual)<0}">
+                {{calculo(item.actual,item.anioAnt)}}
+            </td>
+            <td [ngClass]="{'negativo': (item.anioAnt-item.actual)<0}">
+                {{calculoPorcentaje(item.actual,item.anioAnt)}}
+            </td>
+            <td [ngClass]="{'negativo': (item.forecast-item.actual)<0}">
+                {{calculo(item.actual,item.forecast)}}
+            </td>
+            <td [ngClass]="{'negativo': (item.forecast-item.actual)<0}">
+                {{calculoPorcentaje(item.actual,item.forecast)}}
+            </td>
+        </tr>
+    </tfoot>
+</table>
